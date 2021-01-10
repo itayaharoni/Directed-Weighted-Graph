@@ -6,39 +6,7 @@ from GraphAlgoInterface import GraphAlgoInterface as ga
 from GraphInterface import GraphInterface as gi
 from NodeData import NodeData as nd
 import numpy as np
-
-class PriorityQueue(nd):
-    """This class is an implementation of a PriorityQueue for the NodeData class."""
-
-    def __init__(self):
-        """"A simple constructor for the class"""
-        self._queue = []
-
-    def insert(self, item: nd):
-        """This method receives a NodeData and inserts it to the PriorityQueue.
-        @:param item - NodeData"""
-        self._queue.append(item)
-
-    def is_empty(self) -> bool:
-        """This method returns True iff the PriorityQueue is empty.
-        @:return True - iff (if and only if) the PriorityQueue is empty"""
-        return len(self._queue) == 0
-
-    def delete(self) -> nd:
-        """This method delete the NodeData with the smallest weight value in the PriorityQueue,
-        and returns the NodeData.
-        @:return NodeData - with the smallest weight value"""
-        try:
-            min_index = 0
-            for i in range(len(self._queue)):
-                if self._queue[i].get_weight() < self._queue[min_index].get_weight():
-                    min_index = i
-            item = self._queue[min_index]
-            del self._queue[min_index]
-            return item
-        except IndexError as e:
-            print(e)
-            exit()
+from queue import PriorityQueue as pq
 
 
 class GraphAlgo(ga):
@@ -138,19 +106,19 @@ class GraphAlgo(ga):
         if all_nodes.get(id1) is None or all_nodes.get(id1) is None:
             return float('inf'), []
         if id1 == id2:
-            return 0,[]
+            return 0,[id1]
         for k,v in all_nodes.items():
             v.set_weight(float('inf'));
         first_node=all_nodes[id1]
         first_node.set_weight(0)
-        queue=PriorityQueue()
-        queue.insert(first_node)
-        while not queue.is_empty():
-            first_node=queue.delete()
+        queue=pq()
+        queue.put((first_node.get_weight(),first_node))
+        while not queue.empty():
+            first_node=queue.get()[1]
             for dest,weight in self._graph.all_out_edges_of_node(first_node.get_key()).items():
                 if all_nodes[dest].get_weight()> first_node.get_weight()+weight:
                     all_nodes[dest].set_weight(first_node.get_weight()+weight)
-                    queue.insert(all_nodes[dest])
+                    queue.put((all_nodes[dest].get_weight(),all_nodes[dest]))
         dest_node=all_nodes[id2]
         dist = dest_node.get_weight()
         if dist == float('inf'):
@@ -289,5 +257,4 @@ class GraphAlgo(ga):
                 ax.plot([x_val,x_val_dest],[y_val,y_val_dest],color='red',zorder=1)
         plt.axis('off')
         plt.show()
-
 

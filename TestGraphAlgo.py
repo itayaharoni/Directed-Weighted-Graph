@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from DiGraph import DiGraph
-from GraphAlgo import GraphAlgo, PriorityQueue
+from GraphAlgo import GraphAlgo
 
 
 class Test(TestCase):
@@ -16,24 +16,6 @@ class Test(TestCase):
         self.graph.add_node(5, (5, 5, 5))
         for i in range(4):
             self.graph.add_edge(i + 1, i + 2, i + 1)
-
-    def test_priority_queue(self):
-        self.graph.get_all_v()[1].set_weight(1)
-        self.graph.get_all_v()[2].set_weight(2)
-        self.graph.get_all_v()[3].set_weight(3)
-        self.graph.get_all_v()[4].set_weight(4)
-        self.graph.get_all_v()[5].set_weight(5)
-        queue = PriorityQueue()
-        queue.insert(self.graph.get_all_v()[1])
-        queue.insert(self.graph.get_all_v()[5])
-        queue.insert(self.graph.get_all_v()[4])
-        queue.insert(self.graph.get_all_v()[2])
-        queue.insert(self.graph.get_all_v()[3])
-        self.assertEqual(1, queue.delete().get_weight())
-        self.assertEqual(2, queue.delete().get_weight())
-        self.assertEqual(3, queue.delete().get_weight())
-        self.assertEqual(4, queue.delete().get_weight())
-        self.assertEqual(5, queue.delete().get_weight())
 
     def test_get_graph(self):
         self.assertEqual(self.graph_algo.get_graph(), self.graph)

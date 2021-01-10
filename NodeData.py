@@ -81,12 +81,17 @@ class NodeData:
     def __eq__(self, other)->bool:
         """This method returns True iff the other node equals this node.
         @:return True iff (if and only if) this node equals other node"""
+        if not isinstance(other, self.__class__):
+            return False
         key_flag = other.get_key() == self._key
         weight_flag = other.get_weight() == self._weight
         info_flag= other.get_info() == self._info
         location_flag= other.get_location() == self._location
         tag_flag=other.get_tag() == self._tag
         return key_flag and weight_flag and info_flag and location_flag
+
+    def __lt__(self, other):
+        return self._weight-other.get_weight()
 
     class NodeDataEncoder(JSONEncoder):
         """ This class is a class of simple json Encoder to the NodeData class"""
