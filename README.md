@@ -44,5 +44,8 @@ the said vertices.
 - connected_components - returns a list of lists, each list represents a SCC in the graph, in case the graph is strongly connected it returns a list of 1 list - The graph.
 - plot_graph - Draws the graph using the matplot library.
 
+Here's is a small taste of what you can do with this repo:
+![‏‏plot](https://user-images.githubusercontent.com/74153075/104137440-51156d00-53a5-11eb-8832-c466e50b8d2b.PNG)
+
 In case you are intersted in more detailed information about the project, and the implementation of the mentioned above method you can enter our wiki page.
 You can always contact us for more information or updates through our github profile, we hope this page was helpful to you!
