@@ -156,6 +156,7 @@ class DiGraph(gi):
 
     def __eq__(self, other) -> bool:
         """This method returns True iff the other graph equals this graph.
+        @:param other - another instance of DiGraph
         @:return True iff (if and only if) this graph equals other graph"""
         if not isinstance(other, self.__class__):
             return False

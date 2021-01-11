@@ -224,6 +224,8 @@ class GraphAlgo(ga):
         If the nodes have a position, the nodes will be placed there.
         Otherwise, they will be placed in a random but elegant manner.
         """
+        if self._graph is None:
+            return
         fig,ax=plt.subplots()
         all_nodes=self._graph.get_all_v()
         x_axis=[]
