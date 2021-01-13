@@ -243,6 +243,7 @@ class GraphAlgo(ga):
         height=height_range[1]-height_range[0]
         for node in all_nodes.values():
             if node.get_location() is None:
+                np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
                 node.set_location((width_range[0]+width*np.random.uniform(low=0.01,high=0.1,size=1),height_range[0]+height*np.random.uniform(low=0.01,high=0.1,size=1),0))
         for key,node in all_nodes.items():
             x_val=node.get_location()[0]/width
