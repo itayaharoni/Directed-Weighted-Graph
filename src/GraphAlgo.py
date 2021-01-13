@@ -65,7 +65,6 @@ class GraphAlgo(ga):
             self._graph = new_graph
             return True
         except Exception as e:
-            print(e)
             return False
 
     def save_to_json(self, file_name: str) -> bool:
@@ -142,6 +141,8 @@ class GraphAlgo(ga):
         if self._graph is None:
             return []
         all_nodes=self._graph.get_all_v()
+        if all_nodes.get(id1) is None:
+            return []
         for node in all_nodes.values():
             node.set_tag(-1)
             node.set_weight(-1)
