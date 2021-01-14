@@ -113,12 +113,16 @@ class DiGraph(gi):
             if self._edges_out.get(node_id) is not None:
                 keys_out = list(self._edges_out[node_id].keys())
                 for k in keys_out:
-                    self.remove_edge(node_id, k)
+                    self._edges_out[node_id].pop(k)
+                    self._edges_in[k].pop(node_id)
+                    self._edge_size-=1
                 self._edges_out.pop(node_id)
             if self._edges_in.get(node_id) is not None:
                 keys_in = list(self._edges_in[node_id].keys())
                 for k in keys_in:
-                    self.remove_edge(k, node_id)
+                    self._edges_out[k].pop(node_id)
+                    self._edges_in[node_id].pop(k)
+                    self._edge_size-=1
                 self._edges_in.pop(node_id)
                 self._nodes.pop(node_id)
                 self._mc += 1
