@@ -1,4 +1,4 @@
-# Directed Weighted Grapg Implementation
+# Directed Weighted Graph Implementation
 This repository exihibits an implementation of a directed weighted graph and some complicated algorithms implemnted on the said graph, the repo is in python.
 There are a total of 3 main classes: 
 1) NodeData - an implementation of a vertex in a directed weighted graph.
